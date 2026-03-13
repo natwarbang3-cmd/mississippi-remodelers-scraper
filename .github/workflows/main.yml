@@ -20,7 +20,7 @@ jobs:
             gosom/google-maps-scraper \
             -input /input.txt \
             -results /output/mississippi_remodelers_part1_leads.csv \
-            -depth 10 \
+            -depth 20 \
             -exit-on-inactivity 10m
       
       - name: Upload Results Part 1
