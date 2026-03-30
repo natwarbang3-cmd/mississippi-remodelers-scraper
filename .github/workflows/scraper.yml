@@ -1,0 +1,27 @@
+name: Google Maps Scraper
+
+on:
+  workflow_dispatch:  # Run manually with a button click
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Download Google Maps Scraper
+        run: |
+          wget -q https://github.com/gosom/google-maps-scraper/releases/download/v1.10.1/google_maps_scraper-1.10.1-linux-amd64 -O scraper
+          chmod +x scraper
+
+      - name: Run Scraper
+        run: |
+          ./scraper -input hertfordshire_surrey_remodeling.txt -results hertfordshire_surrey_remodeling_leads.csv -depth 15
+
+      - name: Upload Results as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: scraper-results
+          path: hertfordshire_surrey_remodeling_leads.csv
